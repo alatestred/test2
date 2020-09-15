@@ -16,6 +16,12 @@ import java.util.*;
  */
 public class FirstServlet extends HttpServlet {
 
+
+    // TODO
+    // home task 15.09.2020
+    // сделать servlet logout для выхода из сессий
+    // сделать registration servlet
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -25,13 +31,15 @@ public class FirstServlet extends HttpServlet {
 //        JsonObject object = new JsonObject();
 //        object.addProperty("name", req.getParameter("param"));
 
+        // localhost:8080/firstservlet?param=Test
+
         Map<String, String> map = new HashMap<String, String>();
         map.put("userName", req.getParameter("param"));
 
 
         // download POSTMAN
         // req.getCookies() get and edit
-        String name = req.getParameter("userName");
+        String name = req.getParameter("param");
         Cookie cook = new Cookie("userName", name);
         resp.addCookie(cook);
 
@@ -40,9 +48,14 @@ public class FirstServlet extends HttpServlet {
 
         // req.getHeaderNames() req.getHeader()
 
-        Enumeration headerName = req.getHeaderNames();
-        while (headerName.hasMoreElements()) {
-            System.out.println(headerName.nextElement());
+        if(req.getHeader("testtoken") != null) {
+            map.put("token", req.getHeader("testtoken"));
+        }
+
+        Enumeration<String> headers = req.getHeaderNames();
+        while (headers.hasMoreElements()) {
+            String headName = headers.nextElement();
+            System.out.println( headName + ": " + req.getHeader(headName));
         }
         //req.getRequestedSessionId()
 
