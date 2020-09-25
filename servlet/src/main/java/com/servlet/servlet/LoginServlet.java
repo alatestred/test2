@@ -1,7 +1,8 @@
-package com.servlet.test;
+package com.servlet.servlet;
 
 import com.servlet.service.AuthService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,22 +31,25 @@ public class LoginServlet extends HttpServlet {
         // FILTER
         HttpSession session = req.getSession();
         if(session.getAttribute("user") != null) {
-            resp.sendRedirect("/info");
+            resp.sendRedirect("/");
             return;
         }
 
         if(login == null || psw == null){
-            resp.sendError(401);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
+            requestDispatcher.forward(req, resp);
             return;
         }
 
         try {
-            AuthService.login(login, psw, session);
+            AuthService.login(login, psw, req);
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("http://localhost:63342/servlet/web/front/index.html");
+            req.setAttribute("error", e.getMessage());
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
+            requestDispatcher.forward(req, resp);
         }
 
-        resp.sendRedirect("/info");
+        resp.sendRedirect("/");
     }
 }

@@ -1,4 +1,4 @@
-package com.servlet.test;
+package com.servlet.servlet;
 
 import com.servlet.service.UserService;
 

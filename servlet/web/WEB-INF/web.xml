@@ -3,30 +3,35 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>firstServlet</servlet-name>
-        <servlet-class>com.servlet.test.FirstServlet</servlet-class>
+        <servlet-class>com.servlet.servlet.FirstServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.servlet.test.LoginServlet</servlet-class>
+        <servlet-class>com.servlet.servlet.LoginServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>infoServlet</servlet-name>
-        <servlet-class>com.servlet.test.MainInfoServlet</servlet-class>
+        <servlet-class>com.servlet.servlet.MainInfoServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
-        <servlet-class>com.servlet.test.LogoutServlet</servlet-class>
+        <servlet-class>com.servlet.servlet.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>registrationServlet</servlet-name>
-        <servlet-class>com.servlet.test.RegistrationServlet</servlet-class>
+        <servlet-class>com.servlet.servlet.RegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

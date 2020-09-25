@@ -1,6 +1,5 @@
-package com.servlet.test;
+package com.servlet.servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.servlet.domain.User;
 
 import javax.servlet.ServletException;

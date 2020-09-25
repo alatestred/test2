@@ -1,4 +1,4 @@
-package com.servlet.test;
+package com.servlet.servlet;
 
 import com.servlet.service.AuthService;
 
@@ -21,6 +21,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         AuthService.logout(req.getSession());
-        res.sendRedirect("http://localhost:63342/servlet/web/front/index.html");
+        res.sendRedirect("/");
     }
 }

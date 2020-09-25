@@ -2,6 +2,7 @@ package com.servlet.service;
 
 import com.servlet.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpSession;
  */
 public class AuthService {
 
-    public static void login(String login, String psw, HttpSession session) throws Exception {
+    public static void login(String login, String psw, HttpServletRequest request) throws Exception {
         User user = UserService.findUser(login);
         if (user == null) {
             throw new Exception("User not found");
@@ -20,7 +21,8 @@ public class AuthService {
             throw new Exception("Invalid password");
         }
 
-        session.setAttribute("user", user);
+        request.getSession().setAttribute("user", user);
+        request.setAttribute("userName", user.getName());
     }
 
     public static void logout(HttpSession session) {
