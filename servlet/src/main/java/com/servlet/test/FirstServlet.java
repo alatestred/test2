@@ -29,14 +29,6 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // gson
-        // jackson
-
-//        JsonObject object = new JsonObject();
-//        object.addProperty("name", req.getParameter("param"));
-
-        // localhost:8080/firstservlet?param=Test
-
         Map<String, String> map = new HashMap<String, String>();
         map.put("userName", req.getParameter("param"));
 
@@ -65,15 +57,6 @@ public class FirstServlet extends HttpServlet {
 
         Cookie c1 = new Cookie("sessionId", req.getRequestedSessionId());
         resp.addCookie(c1);
-
-
-//        resp.sendRedirect();
-
-//        resp.sendRedirect("https://www.google.com");
-
-//        resp.sendError();
-//        resp.sendError();
-
 
 
         resp.getWriter().println(new ObjectMapper().writeValueAsString(map));
