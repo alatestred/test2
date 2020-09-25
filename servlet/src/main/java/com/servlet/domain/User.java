@@ -8,14 +8,15 @@ public class User {
 
     private String login;
     private String psw;
+    private String name;
 
-    public User() {
-    }
 
-    public User(String login, String psw) {
+    public User(String login, String name, String psw) {
         this.login = login;
         this.psw = psw;
+        this.name = name;
     }
+
 
     public String getLogin() {
         return login;
@@ -31,5 +32,9 @@ public class User {
 
     public void setPsw(String psw) {
         this.psw = psw;
+    }
+
+    public String getName() {
+        return name;
     }
 }

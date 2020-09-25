@@ -1,14 +1,14 @@
 package com.servlet.test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.servlet.domain.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Daulet Zholtayev
@@ -16,7 +16,11 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet {
 
-    public static User[] USERS = {new User("test", "123"), new User("java", "123qwe123")};
+    public static List<User> USERS = new ArrayList<>(); // {new User("test", "123"), new User("java", "123qwe123")};
+    static {
+        USERS.add(new User("test", "test", "123"));
+        USERS.add(new User("java", "java", "123qwe123"));
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         if(session.getAttribute("user") != null) {
-            resp.sendError(418);
+            resp.sendRedirect("/info");
             return;
         }
 
@@ -53,7 +57,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         session.setAttribute("user", user);
-        resp.getWriter().println("OK");
+        resp.sendRedirect("/info");
     }
 
     private User findUser(String login) {

@@ -22,6 +22,10 @@ public class FirstServlet extends HttpServlet {
     // сделать servlet logout для выхода из сессий
     // сделать registration servlet
 
+    //23.09
+    //регистрация хтмл
+    //добавить имя в регистрации
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
