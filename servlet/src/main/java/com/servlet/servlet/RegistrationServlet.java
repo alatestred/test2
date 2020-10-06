@@ -2,6 +2,7 @@ package com.servlet.servlet;
 
 import com.servlet.service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,16 +27,21 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             UserService.createUser(login, psw, name);
+            resp.sendRedirect("/");
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("/reg.html");
+            req.setAttribute("error", e.getMessage());
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
+            requestDispatcher.forward(req, resp);
         }
 
-        resp.sendRedirect("http://localhost:63342/servlet/web/front/index.html");
+
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
+            IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }

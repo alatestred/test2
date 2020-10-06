@@ -27,7 +27,8 @@ public class FirstServlet extends HttpServlet {
     //добавить имя в регистрации
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("userName", req.getParameter("param"));
@@ -44,14 +45,14 @@ public class FirstServlet extends HttpServlet {
 
         // req.getHeaderNames() req.getHeader()
 
-        if(req.getHeader("testtoken") != null) {
+        if (req.getHeader("testtoken") != null) {
             map.put("token", req.getHeader("testtoken"));
         }
 
         Enumeration<String> headers = req.getHeaderNames();
         while (headers.hasMoreElements()) {
             String headName = headers.nextElement();
-            System.out.println( headName + ": " + req.getHeader(headName));
+            System.out.println(headName + ": " + req.getHeader(headName));
         }
         //req.getRequestedSessionId()
 
