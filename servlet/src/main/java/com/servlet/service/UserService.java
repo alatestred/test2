@@ -2,8 +2,10 @@ package com.servlet.service;
 
 import com.servlet.domain.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Service to connect with DB
@@ -12,14 +14,7 @@ import java.util.List;
  */
 public class UserService {
 
-    public static List<User> USERS = new ArrayList<>();
-
-    static {
-        USERS.add(new User("test", "test", "123"));
-        USERS.add(new User("java", "java", "123qwe123"));
-    }
-
-    public static User createUser(String login, String psw, String name) throws Exception {
+    public static void createUser(String login, String psw, String name) throws Exception {
         if (login == null || psw == null || name == null) {
             throw new Exception("Invalid fields");
         }
@@ -27,16 +22,30 @@ public class UserService {
             throw new Exception("Login exists");
         }
 
-        User user = new User(login, name, psw);
-        USERS.add(user);
-        return user;
+        DBConnectionService connectionService = new DBConnectionService();
+        Connection connection = connectionService.getConnection();
+
+        String sql = "insert into \"user\"(name, login, psw) values (?,?,?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, login);
+        preparedStatement.setString(3, psw);
+        preparedStatement.execute();
     }
 
-    public static User findUser(String login) {
-        for (User user : USERS) {
-            if (user.getLogin().equals(login)) {
-                return user;
-            }
+    public static User findUser(String login) throws SQLException, ClassNotFoundException {
+        DBConnectionService connectionService = new DBConnectionService();
+        Connection connection = connectionService.getConnection();
+
+        String sql = "select * from \"user\" where login=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, login);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next()) {
+            return new User(resultSet.getString("login"),
+                    resultSet.getString("name"),
+                    resultSet.getString("psw"));
         }
         return null;
     }
