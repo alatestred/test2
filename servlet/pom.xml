@@ -58,7 +58,7 @@
 
             <id>ilyas</id>
             <properties>
-                <db.url>jdbc:postgresql://localhost:5432/postgres</db.url>
+                <db.url>jdbc:postgresql://localhost:5432/test</db.url>
                 <db.username>postgres</db.username>
                 <db.pass>1</db.pass>
             </properties>

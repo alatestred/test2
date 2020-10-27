@@ -14,8 +14,8 @@ import java.sql.SQLException;
  */
 public class UserService {
 
-    public static void createUser(String login, String psw, String name) throws Exception {
-        if (login == null || psw == null || name == null) {
+    public static void createUser(String login, String password, String name) throws Exception {
+        if (login == null || password == null || name == null) {
             throw new Exception("Invalid fields");
         }
         if (findUser(login) != null) {
@@ -25,11 +25,11 @@ public class UserService {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
 
-        String sql = "insert into \"user\"(name, login, psw) values (?,?,?);";
+        String sql = "insert into users (name, login, password) values (?,?,?);";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, login);
-        preparedStatement.setString(3, psw);
+        preparedStatement.setString(3, password);
         preparedStatement.execute();
     }
 
@@ -37,7 +37,7 @@ public class UserService {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
 
-        String sql = "select * from \"user\" where login=?";
+        String sql = "select * from users where login=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -45,7 +45,7 @@ public class UserService {
         if(resultSet.next()) {
             return new User(resultSet.getString("login"),
                     resultSet.getString("name"),
-                    resultSet.getString("psw"));
+                    resultSet.getString("password"));
         }
         return null;
     }
