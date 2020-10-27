@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.servlet.domain.Chat" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 27.10.2020
@@ -11,6 +12,14 @@
     <title>main</title>
 </head>
 <body>
+
+<% List<Chat> chats = (List<Chat>)request.getAttribute("chats");%>
+
+<%
+    for (Chat chat: chats) {
+        out.println(chat.getName());
+    }
+%>
 
 </body>
 </html>

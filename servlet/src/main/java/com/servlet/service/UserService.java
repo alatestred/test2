@@ -43,7 +43,8 @@ public class UserService {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()) {
-            return new User(resultSet.getString("login"),
+            return new User(resultSet.getLong("id"),
+                    resultSet.getString("login"),
                     resultSet.getString("name"),
                     resultSet.getString("password"));
         }

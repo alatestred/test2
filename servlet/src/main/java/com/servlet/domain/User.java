@@ -6,17 +6,25 @@ package com.servlet.domain;
  */
 public class User {
 
+    private long id;
     private String login;
     private String psw;
     private String name;
 
 
-    public User(String login, String name, String psw) {
+    public User(Long id, String login, String name, String psw) {
         this.login = login;
         this.psw = psw;
         this.name = name;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
