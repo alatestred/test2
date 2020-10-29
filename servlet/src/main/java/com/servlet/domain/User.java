@@ -13,6 +13,7 @@ public class User {
 
 
     public User(Long id, String login, String name, String psw) {
+        this.id = id;
         this.login = login;
         this.psw = psw;
         this.name = name;

@@ -12,14 +12,16 @@
     <title>main</title>
 </head>
 <body>
+<div class="main">
+    <div class="list">
+        <% List<Chat> chats = (List<Chat>) request.getAttribute("chats");%>
 
-<% List<Chat> chats = (List<Chat>)request.getAttribute("chats");%>
-
-<%
-    for (Chat chat: chats) {
-        out.println(chat.getName());
-    }
-%>
-
+        <%
+            for (Chat chat : chats) {
+                out.println("<a href='/msg?id=" + chat.getId() + "'>" + chat.getName() + "</a>");
+            }
+        %>
+    </div>
+</div>
 </body>
 </html>

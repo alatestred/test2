@@ -21,9 +21,9 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String psw = req.getParameter("psw");
 
-        System.out.println(login);
-        System.out.println(name);
-        System.out.println(psw);
+//        System.out.println(login);
+//        System.out.println(name);
+//        System.out.println(psw);
 
         try {
             UserService.createUser(login, psw, name);

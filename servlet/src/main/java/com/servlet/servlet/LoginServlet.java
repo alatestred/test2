@@ -52,6 +52,6 @@ public class LoginServlet extends HttpServlet {
             requestDispatcher.forward(req, resp);
         }
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/info");
     }
 }

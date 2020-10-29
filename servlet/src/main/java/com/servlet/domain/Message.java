@@ -2,7 +2,7 @@ package com.servlet.domain;
 
 import java.util.Date;
 
-public class Messages {
+public class Message {
     private long id;
     private String message;
     private Date date;
