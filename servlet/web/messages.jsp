@@ -56,6 +56,7 @@
                                 text += list[i].author + "-" + new Date(list[i].date) + "<br>" + list[i].message + "<br>";
                             }
                             messages.innerHTML = text;
+                            message.value =  "";
                         }
                     };
                     xhttp.open("POST", '/msg?chatId=<%=request.getAttribute("chatId")%>&message=' + message.value, true);
