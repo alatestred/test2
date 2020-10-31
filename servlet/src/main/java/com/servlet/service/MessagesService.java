@@ -30,13 +30,12 @@ public class MessagesService {
     public static void setMessage(String messageIn, long chatId, long author) throws SQLException, ClassNotFoundException {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
-        String inSql = "insert into messages (message, date, chat_id, author) values (? , ?, ?, ? );";
+        String inSql = "insert into messages (message, date, chat_id, author) values (? , NOW(), ?, ? );";
         PreparedStatement preparedStatement = connection.prepareStatement(inSql);
         preparedStatement.setString(1, messageIn);
-        preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-        preparedStatement.setLong(3, chatId);
-        preparedStatement.setLong(4, author);
-        preparedStatement.executeQuery();
+        preparedStatement.setLong(2, chatId);
+        preparedStatement.setLong(3, author);
+        preparedStatement.executeUpdate();
         getMessages(chatId);
     }
 }

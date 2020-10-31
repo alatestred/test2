@@ -1,5 +1,6 @@
 package com.servlet.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.servlet.domain.Message;
 import com.servlet.domain.User;
 import com.servlet.service.MessagesService;
@@ -26,12 +27,18 @@ public class MessagesServlet extends HttpServlet {
         String chatId = req.getParameter("chatId");
         try {
             MessagesService.setMessage( messageIn, Long.valueOf(chatId), user.getId());
+            String pId = req.getParameter("chatId");
+            Long id = Long.valueOf(pId);
+            List<Message> messages = MessagesService.getMessages(id);
+            resp.getWriter().println(new ObjectMapper().writeValueAsString(messages));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        doGet(req, resp);
+
+//        doGet(req, resp);
     }
 
     @Override
