@@ -11,7 +11,7 @@ public class MessagesService {
     public static List<Message> getMessages(long chatId) throws SQLException, ClassNotFoundException {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
-        String sql = "select id, message, date, chat_id, author from messages where chat_id = ?";
+        String sql = "select m.id, m.message, m.date, u.name  from messages m left join users as u on u.id=m.author where m.chat_id = ? order by m.date asc";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, chatId);
         List<Message> messageList = new ArrayList<>();
@@ -20,8 +20,8 @@ public class MessagesService {
             Message message = new Message();
             message.setId(resultSet.getLong("id"));
             message.setMessage(resultSet.getString("message"));
-            message.setDate(resultSet.getDate("date"));
-            message.setAuthor(resultSet.getLong("author"));
+            message.setDate(resultSet.getTimestamp("date"));
+            message.setAuthor(resultSet.getString("name"));
             messageList.add(message);
         }
         return messageList;
@@ -36,5 +36,7 @@ public class MessagesService {
         preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
         preparedStatement.setLong(3, chatId);
         preparedStatement.setLong(4, author);
+        preparedStatement.executeQuery();
+        getMessages(chatId);
     }
 }

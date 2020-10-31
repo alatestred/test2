@@ -1,5 +1,6 @@
 <%@ page import="com.servlet.domain.Message" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: User
   Date: 27.10.2020
@@ -20,12 +21,15 @@
             <%List<Message> messages = (List<Message>) request.getAttribute("messages");%>
             <%
                 for (Message message : messages) {
-                    out.println(message.getDate() + ": " + message.getMessage());
+                    out.println(message.getAuthor() + "-" + message.getDate() + "<br>" + message.getMessage() + "<br>");
+
                 }%>
+
+
         </div>
         <div class="message_input">
-            <form action="/msg" method="post" id="message-form">
-                <input  id="message-text" class="message-form_inp"  name="message" type="text" required
+            <form action="/msg?chatId=<%=request.getAttribute("chatId")%>" method="post" id="message-form">
+                <input id="message-text" class="message-form_inp" name="message" type="text" required
                        placeholder="Enter your message">
                 <input type="submit" class="message-form_sub" value="Send">
             </form>

@@ -1,5 +1,6 @@
 package com.servlet.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Message {
@@ -7,13 +8,13 @@ public class Message {
     private String message;
     private Date date;
     private long chatId;
-    private long author;
+    private String author;
 
-    public long getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(long author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

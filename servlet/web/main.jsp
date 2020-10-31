@@ -18,7 +18,7 @@
 
         <%
             for (Chat chat : chats) {
-                out.println("<a href='/msg?id=" + chat.getId() + "'>" + chat.getName() + "</a>");
+                out.println("<a href='/msg?chatId=" + chat.getId() + "'>" + chat.getName() + "</a>");
             }
         %>
     </div>
