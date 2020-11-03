@@ -27,7 +27,7 @@ public class MessagesServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String chatId = req.getParameter("chatId");
         try {
-            MessagesService.setMessage( messageIn, Long.valueOf(chatId), user.getId());
+            MessagesService.setMessage( messageIn, Long.valueOf(chatId), user.getId(), null);
             String pId = req.getParameter("chatId");
             Long id = Long.valueOf(pId);
             List<Message> messages = MessagesService.getMessages(id);

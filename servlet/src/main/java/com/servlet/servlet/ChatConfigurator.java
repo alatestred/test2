@@ -21,5 +21,6 @@ public class ChatConfigurator extends ServerEndpointConfig.Configurator {
             return;
         }
         sec.getUserProperties().put("userId", user.getId());
+        sec.getUserProperties().put("login", user.getLogin());
     }
 }

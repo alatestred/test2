@@ -43,7 +43,8 @@
                 var webSocket = new WebSocket("ws://localhost:8080/wsChat")
 
                 webSocket.onmessage = function(event) {
-                    console.log("WebSocket message received:", event);
+                    console.log("WebSocket message received:", event.data);
+                    var obj = JSON.parse(event.data);
                 };
 
                 function sendMessage() {
@@ -52,6 +53,7 @@
                         message: message.value
                     }
                     webSocket.send(JSON.stringify(obj));
+                    message.value = "";
 
                     // var xhttp = new XMLHttpRequest();
                     // xhttp.onreadystatechange = function() {
