@@ -1,0 +1,9 @@
+body {
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    margin: 0;
+    padding: 0;
+    background-image:  url(https://medatech.com/wp-content/uploads/2017/11/Website-Background.png);
+    font-family: Roboto, sans-serif;
+    background-size: 100%;
+}
