@@ -2,28 +2,50 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" type="text/css">
     <title>Main</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-
-<%! String helloText = "Hello"; %>
+<div class="index-box">
+<%! String helloText = "Welcome"; %>
 <% User user = (User) request.getSession().getAttribute("user");%>
-<h1><%= helloText %>
+<h2><%= helloText %>
     <%
         if (user != null) {
             out.println(user.getName());
         }
     %>
-</h1>
+</h2>
+
+
+    <a href=
 <% if(user == null) {
-        out.println("<a href=\"/login\">Login</a><a href=\"/registration\">Registration</a>");
+        out.println(
+                "\"/login\"" +
+                " <span></span>\n" +
+                "        <span></span>\n" +
+                "        <span></span>\n" +
+                "        <span></span>\n" +
+                "Login</a>");
+        out.println("<a href=\"/registration\">" +
+                " <span></span>\n" +
+                "        <span></span>\n" +
+                "        <span></span>\n" +
+                "        <span></span>\n" +
+                "Regiser</a>");
 } else {
-    out.println("<a href=\"/logout\">Logout</a>");
+    out.println(
+            "<a href=\"/logout\">" +
+            " <span></span>\n" +
+            "        <span></span>\n" +
+            "        <span></span>\n" +
+            "        <span></span>" +
+            "Logout</a>\n");
 }
-%>
-
+%>>
+    </div>
+</div>
 </body>
-
-<%@ include file="footer.jsp"%>
 </html>

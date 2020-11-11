@@ -4,7 +4,8 @@
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="registration.css" rel="stylesheet" type="text/css">
 
     <title>Login</title>
@@ -12,36 +13,42 @@
 </head>
 
 <body>
-<div class="dws-wrapper">
 
 
 
-    <div class="dws-form">
 
-        <input type="radio" name="tabs" id="tab-2">
-        <label class="tab" for="tab-2" title="Вкладка 2">Регистрация</label>
+    <div class="registration-box">
+
+        <h2>Sign Up</h2>
 
         <form id="form-2" class="tab-form" action="/registration" method="post">
-            <div class="box-input">
-                <input class="input" id="login" name="login"  type="text" required/>
-                <label>Введите логин</label>
+
+            <div class="user-box">
+                <input class="input" id="login" name="login"  type="text" autocomplete="off" required/>
+                <label>Username</label>
             </div>
-            <div class="box-input">
-                <input class="input" id="name" name="name"  type="text" required/>
-                <label>Введите Имя</label>
+            <div class="user-box">
+                <input class="input" id="name" name="name"  type="text" autocomplete="off" required/>
+                <label>Name</label>
             </div>
-            <div class="box-input">
+            <div class="user-box">
                 <input class="input" id="password1" name="psw"  type="password" required/>
-                <label>Введите пароль</label>
+                <label>Password</label>
             </div>
 
-            <input  class="button" type="submit" value="РЕГИСТРАЦИЯ">
+            <button type="submit" class="float">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <b>Sign Up</b>
+            </button>
 
         </form>
 
 
-        <% if (request.getAttribute("error") != null) {out.println(request.getAttribute("error"));}%>
+        <h5><% if (request.getAttribute("error") != null) {out.println(request.getAttribute("error"));}%></h5>
     </div>
-</div>
+
 </body>
 </html>

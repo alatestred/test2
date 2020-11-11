@@ -8,38 +8,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="login.css" rel="stylesheet" type="text/css">
     <title>Login</title>
 </head>
 <body>
-<div class="login">
-    <div class="heading">
-        <h2>Sign in</h2>
+<div class="login-box">
 
-        <form action="/login">
+        <h2>Log In</h2>
 
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" placeholder="Username or email" name="login" id="login">
+        <form id="form" class="tab-form" action="/login">
+
+            <div class="user-box">
+                <input type="text" name="login" id="login" autocomplete="off" required>
+                <label>Login</label>
             </div>
 
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" placeholder="Password" name="psw" id="psw">
+            <div class="user-box">
+                <input type="password" name="psw" id="psw" required>
+                <label>Password</label>
             </div>
 
             <!--            <button type="submit" class="float" onclick="testlogin()">Login</button>-->
-            <button type="submit" class="float">Login</button>
+            <button type="submit" class="float">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <b>Log In</b>
+            </button>
         </form>
 
+    <h5>
         <%
             String error = (String) request.getAttribute("error");
             if (error != null) {
                 out.println("<span>" + error + "</span>");
             }
         %>
+    </h5>
 
-    </div>
 </div>
 </body>
-<%@ include file="footer.jsp"%>
+<%--<%@ include file="footer.jsp"%>--%>
 </html>

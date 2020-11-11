@@ -5,7 +5,27 @@
 }
 
 body {
-    font: 13px Helvetica, Arial;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+
+.chat-field {
+    position: fixed;
+    top: 0;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.messages {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+
 }
 
 form {
@@ -16,88 +36,45 @@ form {
     width: 100%;
 }
 
-form input {
-    border: 0;
-    padding: 10px;
-    width: 90%;
-    margin-right: 0.5%;
-}
-
-form button {
-    width: 9%;
-    background: rgb(130, 224, 255);
-    border: none;
-    padding: 10px;
-}
-
-#chat-field {
-    position: fixed;
-    top: 0;
-    left: 10px;
-    width: 100%;
-    height: 100%;
-}
-
-/*.chat-field {*/
-/*    position: center;*/
-/*    border: 1px solid #333;*/
-/*    margin: 15px;*/
-/*    width: 40%;*/
-/*    height: 70%;*/
-/*    background: #555;*/
-/*    color: #fff;*/
-/*}*/
-
-.messages {
-    min-height: 93%;
-    max-height: 93%;
-    overflow: auto;
-}
-
-.messages-content {
-    padding: 1px;
-}
-
-.message {
-    boerder-left: 3px solid #333;
-    margin-top: 2px;
-    padding: 2px;
-}
-
-.message_black {
-    boreser-color: black;
-}
-
-.message_blue {
-    boreser-color: blue;
-}
-
-.message_green {
-    boreser-color: green;
-}
-
-.message_red {
-    boreser-color: red;
-}
-
-.message_input {
-    min-height: 6%;
-}
 
 input {
     font-family: Arial;
     font-size: 16px;
     vertical-align: middle;
-    background: #333;
-    color: #fff;
+    background: rgb(248, 248, 248);
     border: 0;
     display: inline-block;
     margin: 1px;
     height: 30px;
 }
 
+.message-form_sub {
+    box-shadow: #dedede;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background:#55e9ab;
+    color: #fff;
+}
+
+
+.messages-content {
+    border: 2px solid #000000;
+    background-color: #55e9ab;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 50%;
+    height: 50%;
+}
+
+.messages {
+    min-height: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
 .message-form_inp {
-    width: 79%;
+    width: 80%;
 }
 
 .message-form_sub {

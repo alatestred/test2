@@ -2,8 +2,6 @@ package com.servlet.service;
 
 import com.servlet.domain.Chat;
 import com.servlet.domain.enams.ChatType;
-
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -3,11 +3,26 @@ package com.servlet.service;
 import com.servlet.domain.Message;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MessagesService {
+    public static List<Long> getUsersIdOfChat(long chatId) throws SQLException, ClassNotFoundException {
+        DBConnectionService connectionService = new DBConnectionService();
+        Connection connection = connectionService.getConnection();
+        String sql = "select uc.user_id as user_id from user_chat as uc where uc.chat_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, chatId);
+        List<Long> userIdList = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            userIdList.add(resultSet.getLong("user_id"));
+        }
+        return userIdList;
+
+    }
+
     public static List<Message> getMessages(long chatId) throws SQLException, ClassNotFoundException {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
@@ -27,7 +42,7 @@ public class MessagesService {
         return messageList;
     }
 
-    public static void setMessage(String messageIn, long chatId, long author) throws SQLException, ClassNotFoundException {
+    public static Message setMessage(String messageIn, long chatId, long author, String login) throws SQLException, ClassNotFoundException {
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
         String inSql = "insert into messages (message, date, chat_id, author) values (? , NOW(), ?, ? );";
@@ -36,6 +51,16 @@ public class MessagesService {
         preparedStatement.setLong(2, chatId);
         preparedStatement.setLong(3, author);
         preparedStatement.executeUpdate();
-        getMessages(chatId);
+
+        if (login != null) {
+            Message msg = new Message();
+            msg.setAuthor(UserService.findUser(login).getName());
+            msg.setChatId(chatId);
+            msg.setDate(new Date());
+            msg.setMessage(messageIn);
+            return msg;
+        } else {
+            return null;
+        }
     }
 }

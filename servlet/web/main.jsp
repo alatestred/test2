@@ -14,13 +14,16 @@
 <body>
 <div class="main">
     <div class="list">
+
+        <tr>
         <% List<Chat> chats = (List<Chat>) request.getAttribute("chats");%>
 
         <%
             for (Chat chat : chats) {
-                out.println("<a href='/msg?chatId=" + chat.getId() + "'>" + chat.getName() + "</a>");
+                out.println("<td><a href='/msg?chatId=" + chat.getId() + "'>" + chat.getName() + "</a></td>");
             }
         %>
+        </tr>
     </div>
 </div>
 </body>

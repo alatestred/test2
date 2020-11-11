@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.List;
 
 
@@ -27,7 +28,7 @@ public class MessagesServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String chatId = req.getParameter("chatId");
         try {
-            MessagesService.setMessage( messageIn, Long.valueOf(chatId), user.getId());
+            MessagesService.setMessage( messageIn, Long.valueOf(chatId), user.getId(), null);
             String pId = req.getParameter("chatId");
             Long id = Long.valueOf(pId);
             List<Message> messages = MessagesService.getMessages(id);

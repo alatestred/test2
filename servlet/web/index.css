@@ -9,7 +9,7 @@ body {
     background: linear-gradient(#141e30, #243b55);
 }
 
-.registration-box {
+.index-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -22,18 +22,18 @@ body {
     border-radius: 10px;
 }
 
-.registration-box h2 h5 {
+.index-box h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
     text-align: center;
 }
 
-.registration-box .user-box {
+.index-box  {
     position: relative;
 }
 
-.registration-box .user-box input {
+.index-box .user-box input {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -44,9 +44,10 @@ body {
     outline: none;
     background: transparent;
 }
-.registration-box .user-box label {
+
+.index-box .user-box label {
     position: absolute;
-    top: 0;
+    top:0;
     left: 0;
     padding: 10px 0;
     font-size: 16px;
@@ -54,30 +55,32 @@ body {
     pointer-events: none;
     transition: .5s;
 }
-.registration-box .user-box input:focus ~ label,
-.registration-box .user-box input:valid ~ label {
+
+.lindex-box .user-box input:focus ~ label,
+.lindex-box .user-box input:valid ~ label {
     top: -20px;
     left: 0;
     color:#a0f403;
     font-size: 12px;
 }
 
-.registration-box form button {
+.index-box form a {
     background-color: #141e30;
     position: relative;
+    left: 17%;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 5px 10px;
     color: #a0f403;
     font-size: 16px;
     text-decoration: none;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     overflow: hidden;
     transition: .5s;
-    margin-top: 40px;
+    margin-top: 0;
     letter-spacing: 4px
 }
 
-.registration-box button:hover {
+.index-box a:hover {
     background: #a0f403;
     color: #fff;
     border-radius: 5px;
@@ -87,12 +90,12 @@ body {
     0 0 100px #a0f403;
 }
 
-.registration-box button span {
+.index-box a span {
     position: absolute;
     display: block;
 }
 
-.registration-box button span:nth-child(1) {
+.index-box a span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -110,7 +113,7 @@ body {
     }
 }
 
-.registration-box button span:nth-child(2) {
+.index-box a span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -129,7 +132,7 @@ body {
     }
 }
 
-.registration-box button span:nth-child(3) {
+.index-box a span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -148,7 +151,7 @@ body {
     }
 }
 
-.registration-box button span:nth-child(4) {
+.index-box a span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -166,3 +169,4 @@ body {
         bottom: 100%;
     }
 }
+  
