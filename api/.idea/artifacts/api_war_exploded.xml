@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="api:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/api_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="api" />
+          <element id="jpa-descriptors" facet="api/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0" />
+          <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="api/web/Web" />
+    </root>
+  </artifact>
+</component>

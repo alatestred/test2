@@ -11,6 +11,9 @@ public class User {
     private String psw;
     private String name;
 
+    public User(long id, String login, String name) {
+       this(id, login, name, null);
+    }
 
     public User(Long id, String login, String name, String psw) {
         this.id = id;

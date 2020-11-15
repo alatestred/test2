@@ -1,11 +1,15 @@
 package com.servlet.service;
 
+import com.servlet.domain.Message;
 import com.servlet.domain.User;
+import com.servlet.domain.dto.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Service to connect with DB
@@ -31,6 +35,27 @@ public class UserService {
         preparedStatement.setString(2, login);
         preparedStatement.setString(3, password);
         preparedStatement.execute();
+    }
+
+    public static List<UserDTO> findUsersLikeLogin(String pretty) throws SQLException, ClassNotFoundException {
+        pretty = "%" + pretty +  "%";
+
+        DBConnectionService connectionService = new DBConnectionService();
+        Connection connection = connectionService.getConnection();
+
+        String sql = "select * from users where login like ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, pretty);
+
+
+        List<UserDTO> result = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+           result.add(new UserDTO(resultSet.getLong("id"),
+                   resultSet.getString("login"),
+                   resultSet.getString("name")));
+        }
+        return result;
     }
 
     public static User findUser(String login) throws SQLException, ClassNotFoundException {
