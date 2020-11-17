@@ -57,9 +57,7 @@
                     for (let i = 0; i < list.length; i++) {
                         text += "<div style='cursor: pointer; margin-bottom: 10px;' onclick='selectUser(" + list[i].id + ")'>" + list[i].login + " - " + list[i].name + "</div><br>";
                     }
-                    // let a = this.responseText
-                    // for (let i in a)
-                    // autocomplete(inputSearch, a.login);
+
                     results.innerHTML = text;
                     console.log('text: ' + text)
                 }
