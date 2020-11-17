@@ -6,8 +6,6 @@ import com.servlet.domain.User;
 import com.servlet.domain.dto.*;
 import com.servlet.service.ChatService;
 import com.servlet.service.UserService;
-
-import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -18,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.xml.ws.handler.MessageContext;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,9 +34,16 @@ public class UserResource {
     @GET
     @Path("/find")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findLikeLogin(@QueryParam("param") String param) {
+    public String findLikeLogin(@QueryParam("param") String param, @QueryParam("id") long currentId) {
+        System.out.println("param: " + param);
+        System.out.println("id: " + currentId);
         try {
             List<UserDTO> users = UserService.findUsersLikeLogin(param);
+            if (users.contains(currentId)) {
+                int ind = users.indexOf(currentId);
+                users.remove(ind);
+            }
+
             return new ObjectMapper().writeValueAsString(users);
         }catch (SQLException | ClassNotFoundException | JsonProcessingException e){
             e.printStackTrace();
