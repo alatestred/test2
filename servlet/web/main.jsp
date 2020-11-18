@@ -47,46 +47,42 @@
         let results = document.getElementById("search-result")
         let inputSearch = document.getElementById("search");
 
-        function search() {
-            window.addEventListener("load", function () {
-                inputSearch.addEventListener('keyup', function (event) {
-                    hinter(event)
-                });
-                window.hinterXHR = new XMLHttpRequest();
-            });
+        inputSearch.addEventListener('keyup', function (event) {
+            hinter(event)
+        });
+        window.hinterXHR = new XMLHttpRequest();
 
-            function hinter(event) {
+        function hinter(event) {
 
-                let input = event.target;
+            let input = event.target;
 
-                let param = inputSearch.value;
+            let param = inputSearch.value;
 
-                const min_char = 0;
-                if (input.value.length < min_char) {
-                    return;
-                } else {
-                    window.hinterXHR.abort();
-                    window.hinterXHR.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            search.addEventListener
-                            let list = JSON.parse(this.responseText);
-                            let text = "";
-                            for (let i = 0; i < list.length; i++) {
-                                text += "<div style='cursor: pointer; margin-bottom: 10px;' onclick='selectUser(" + list[i].id + ")'>" + list[i].login + " - " + list[i].name + "</div><br>";
-                            }
-                            results.innerHTML = text;
-                            console.log('text: ' + text)
+            const min_char = 0;
+            if (input.value.length < min_char) {
+                return;
+            } else {
+                window.hinterXHR.abort();
+                window.hinterXHR.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        search.addEventListener
+                        let list = JSON.parse(this.responseText);
+                        let text = "";
+                        for (let i = 0; i < list.length; i++) {
+                            text += "<div style='cursor: pointer; margin-bottom: 10px;' onclick='selectUser(" + list[i].id + ")'>" + list[i].login + " - " + list[i].name + "</div><br>";
                         }
-                    };
-                }
-
-                console.log('param: ' + param);
-                <%User user = (User) request.getSession().getAttribute("user");%>
-                let uLogin = '<%=user.getLogin()%>';
-                console.log('login: ' + uLogin);
-                window.hinterXHR.open("GET", '/rest/user/find?param=' + param + "&login=" + uLogin);
-                window.hinterXHR.send();
+                        results.innerHTML = text;
+                        console.log('text: ' + text)
+                    }
+                };
             }
+
+            console.log('param: ' + param);
+            <%User user = (User) request.getSession().getAttribute("user");%>
+            let uLogin = '<%=user.getLogin()%>';
+            console.log('login: ' + uLogin);
+            window.hinterXHR.open("GET", '/rest/user/find?param=' + param + "&login=" + uLogin);
+            window.hinterXHR.send();
         }
 
 

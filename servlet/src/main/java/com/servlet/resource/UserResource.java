@@ -34,19 +34,14 @@ public class UserResource {
     @GET
     @Path("/find")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findLikeLogin(@QueryParam("param") String param, @QueryParam("login") String currentLogin) {
+    public String findLikeLogin(@QueryParam("param") String param, @Context HttpServletRequest request) {
 
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         try {
-            List<UserDTO> users = UserService.findUsersLikeLogin(param);
-            System.out.println(users.toString());
-            if (users.contains(currentLogin)) {
-                int ind = users.indexOf(currentLogin);
-                System.out.println("index: " + ind);
-                List<UserDTO>noCurrentU = (List<UserDTO>) users.remove(ind);
-                return new ObjectMapper().writeValueAsString(noCurrentU);
-            }else return new ObjectMapper().writeValueAsString(users);
-
+            List<UserDTO> users = UserService.findUsersLikeLogin(param, user.getId());
+            return new ObjectMapper().writeValueAsString(users);
 
         }catch (SQLException | ClassNotFoundException | JsonProcessingException e){
             e.printStackTrace();
@@ -61,10 +56,10 @@ public class UserResource {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         try {
-            Long chatId = ChatService.createChat(user.getId(), id);
-            if(chatId == null) {
+            if(user.getId() == id) {
                 return new ObjectMapper().writeValueAsString(new ResponseDao("FAIL", null));
             }
+            Long chatId = ChatService.createChat(user.getId(), id);
             return new ObjectMapper().writeValueAsString(new ResponseDao("OK", chatId));
         } catch (SQLException | ClassNotFoundException | JsonProcessingException throwables) {
             throwables.printStackTrace();

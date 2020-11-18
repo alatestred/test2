@@ -37,15 +37,16 @@ public class UserService {
         preparedStatement.execute();
     }
 
-    public static List<UserDTO> findUsersLikeLogin(String pretty) throws SQLException, ClassNotFoundException {
+    public static List<UserDTO> findUsersLikeLogin(String pretty, Long ownerId) throws SQLException, ClassNotFoundException {
         pretty = "%" + pretty +  "%";
 
         DBConnectionService connectionService = new DBConnectionService();
         Connection connection = connectionService.getConnection();
 
-        String sql = "select * from users where login like ?";
+        String sql = "select * from users where login like ? and id!= ? limit 10";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, pretty);
+        preparedStatement.setLong(2, ownerId);
 
 
         List<UserDTO> result = new ArrayList<>();
