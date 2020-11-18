@@ -9,7 +9,6 @@ body {
     font-family: sans-serif;
     background: linear-gradient(#141e30, #243b55);
 }
-
 body{
     background: #f2f2f2;
     font-family: 'Open Sans', sans-serif;
@@ -52,7 +51,8 @@ body{
 .wrap{
     width: 30%;
     position: absolute;
-    top: 5%;
-    left: 80%;
+    top: 3%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
+

@@ -34,17 +34,20 @@ public class UserResource {
     @GET
     @Path("/find")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findLikeLogin(@QueryParam("param") String param, @QueryParam("id") long currentId) {
-        System.out.println("param: " + param);
-        System.out.println("id: " + currentId);
+    public String findLikeLogin(@QueryParam("param") String param, @QueryParam("login") String currentLogin) {
+
+
         try {
             List<UserDTO> users = UserService.findUsersLikeLogin(param);
-            if (users.contains(currentId)) {
-                int ind = users.indexOf(currentId);
-                users.remove(ind);
-            }
+            System.out.println(users.toString());
+            if (users.contains(currentLogin)) {
+                int ind = users.indexOf(currentLogin);
+                System.out.println("index: " + ind);
+                List<UserDTO>noCurrentU = (List<UserDTO>) users.remove(ind);
+                return new ObjectMapper().writeValueAsString(noCurrentU);
+            }else return new ObjectMapper().writeValueAsString(users);
 
-            return new ObjectMapper().writeValueAsString(users);
+
         }catch (SQLException | ClassNotFoundException | JsonProcessingException e){
             e.printStackTrace();
             return "FAIL";
