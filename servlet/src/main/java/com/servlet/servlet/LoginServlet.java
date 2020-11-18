@@ -44,7 +44,8 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-            AuthService.login(login, psw, req);
+            AuthService authService = new AuthService();
+            authService.login(login, psw, req);
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("error", e.getMessage());

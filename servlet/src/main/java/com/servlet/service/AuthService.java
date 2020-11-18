@@ -1,7 +1,9 @@
 package com.servlet.service;
 
 import com.servlet.domain.User;
+import com.servlet.repositories.UserRepository;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +13,9 @@ import javax.servlet.http.HttpSession;
  */
 public class AuthService {
 
-    public static void login(String login, String psw, HttpServletRequest request) throws Exception {
-        User user = UserService.findUser(login);
+    public void login(String login, String psw, HttpServletRequest request) throws Exception {
+        UserRepository userRepository = new UserRepository();
+        User user = userRepository.findByLogin(login);
         if (user == null) {
             throw new Exception("User not found");
         }

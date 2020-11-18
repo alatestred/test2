@@ -1,6 +1,5 @@
 package com.servlet.domain;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Message {

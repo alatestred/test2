@@ -1,9 +1,10 @@
 package com.servlet.service;
 
-import com.servlet.domain.Message;
 import com.servlet.domain.User;
 import com.servlet.domain.dto.UserDTO;
+import com.servlet.repositories.UserRepository;
 
+import javax.ejb.EJB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,9 @@ import java.util.List;
  * @since 25.09.2020 - 20:06
  */
 public class UserService {
+//
+//    @EJB
+//    UserRepository userRepository;
 
     public static void createUser(String login, String password, String name) throws Exception {
         if (login == null || password == null || name == null) {
@@ -60,20 +64,21 @@ public class UserService {
     }
 
     public static User findUser(String login) throws SQLException, ClassNotFoundException {
-        DBConnectionService connectionService = new DBConnectionService();
-        Connection connection = connectionService.getConnection();
-
-        String sql = "select * from users where login=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, login);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next()) {
-            return new User(resultSet.getLong("id"),
-                    resultSet.getString("login"),
-                    resultSet.getString("name"),
-                    resultSet.getString("password"));
-        }
-        return null;
+//        DBConnectionService connectionService = new DBConnectionService();
+//        Connection connection = connectionService.getConnection();
+//
+//        String sql = "select * from users where login=?";
+//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//        preparedStatement.setString(1, login);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        if(resultSet.next()) {
+//            return new User(resultSet.getLong("id"),
+//                    resultSet.getString("login"),
+//                    resultSet.getString("name"),
+//                    resultSet.getString("password"));
+//        }
+        UserRepository userRepository = new UserRepository();
+        return userRepository.findByLogin(login);
     }
 }
