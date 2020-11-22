@@ -23,7 +23,7 @@ public class MainInfoResource {
         {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
-            if(user == null) {
+            if (user == null) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
                 requestDispatcher.forward(req, resp);
             }
@@ -36,5 +36,7 @@ public class MainInfoResource {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        return null;
     }
 }

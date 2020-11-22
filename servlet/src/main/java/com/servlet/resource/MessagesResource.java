@@ -43,7 +43,7 @@ public class MessagesResource {
             e.printStackTrace();
         }
 }
-
+//
     @POST
     @Path("/send")
     public void sendMessages(@Context HttpServletRequest req, @Context HttpServletResponse resp) {
