@@ -7,7 +7,7 @@
     <div class="heading">
         <h2>Sign in</h2>
 
-        <form action="http://localhost:8080/login">
+        <div>
 
             <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -18,24 +18,23 @@
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                 <input type="password" class="form-control" placeholder="Password" name="psw" id="psw">
             </div>
-
-<!--            <button type="submit" class="float" onclick="testlogin()">Login</button>-->
-            <button type="submit" class="float">Login</button>
-        </form>
+            <button type="button" class="float" onclick="login()">Login</button>
+        </div>
     </div>
 </div>
 </body>
 <footer>
-    <script type="text/javascript"> function testlogin() {
-    var login = document.getElementById("login").value;
-    var psw = document.getElementById("psw").value;
-    $.ajax({
-        type: "GET",
-        url: 'http://localhost:8080/login?login=' + "login" + login + '&psw=' + psw,
-        success: function(data){
-            alert(data);
-        }
-    });
-}</script>
+    <script type="text/javascript">
+        function login() {
+            var login = document.getElementById("login").value;
+            var psw = document.getElementById("psw").value;
+            $.ajax({
+                type: "GET",
+                url: 'http://localhost:8080/rest/login?login=' + "login" + login + '&psw=' + psw,
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }</script>
 </footer>
 </html>

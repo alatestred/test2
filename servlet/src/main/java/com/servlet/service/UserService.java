@@ -39,25 +39,8 @@ public class UserService {
         userRepository.createUser(login, password, name);
     }
 
-    public static List<User> findUsersLikeLogin(String pretty, Long ownerId) throws SQLException, ClassNotFoundException {
+    public static List<User> findUsersLikeLogin(String pretty, Long ownerId) {
         pretty = "%" + pretty + "%";
-
-//        DBConnectionService connectionService = new DBConnectionService();
-//        Connection connection = connectionService.getConnection();
-//
-//        String sql = "select * from users where login like ? and id!= ? limit 10";
-//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//        preparedStatement.setString(1, pretty);
-//        preparedStatement.setLong(2, ownerId);
-//
-//
-//        List<UserDTO> result = new ArrayList<>();
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        while (resultSet.next()) {
-//           result.add(new UserDTO(resultSet.getLong("id"),
-//                   resultSet.getString("login"),
-//                   resultSet.getString("name")));
-//    }
         UserRepository userRepository = new UserRepository();
         return userRepository.findUsersLikeLogin(pretty,ownerId);
 

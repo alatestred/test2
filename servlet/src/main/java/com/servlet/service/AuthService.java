@@ -1,6 +1,7 @@
 package com.servlet.service;
 
 import com.servlet.domain.User;
+import com.servlet.domain.dto.UserDTO;
 import com.servlet.repositories.UserRepository;
 
 import javax.ejb.EJB;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
  */
 public class AuthService {
 
-    public void login(String login, String psw, HttpServletRequest request) throws Exception {
+    public UserDTO login(String login, String psw, HttpServletRequest request) throws Exception {
         UserRepository userRepository = new UserRepository();
         User user = userRepository.findByLogin(login);
         if (user == null) {
@@ -26,6 +27,7 @@ public class AuthService {
 
         request.getSession().setAttribute("user", user);
         request.setAttribute("userName", user.getName());
+        return new UserDTO(user);
     }
 
     public static void logout(HttpSession session) {

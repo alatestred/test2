@@ -2,13 +2,14 @@ package com.servlet.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "messages")
 @NamedQueries(value = {
-        @NamedQuery(name = "getUsersIdOfChat", query = "select uc.user_id as user_id from user_chat as uc" +
-                " where uc.chat_id=:chatId"),
+        @NamedQuery(name = "getUsersIdOfChat", query = "select uc.userId as user_id from UserChat as uc" +
+                " where uc.chatId=:chatId"),
 })
 @NamedNativeQueries(value = {
         @NamedNativeQuery(name = "getMessages", query = "select m.id, m.message, m.date, u.name  from messages m" +
@@ -17,7 +18,7 @@ import java.util.Date;
         @NamedNativeQuery(name = "setMessages", query = "insert into messages " +
                 "(message, date, chat_id, author) values (:messageIn , NOW(), :chatId, :author )")
 })
-public class Message {
+public class Message implements Serializable {
     @Id
     @Column
     private long id;

@@ -1,102 +1,73 @@
 package com.servlet.resource;
-import com.servlet.domain.User;
+
+import com.servlet.domain.dto.UserDTO;
 import com.servlet.service.AuthService;
 import com.servlet.service.UserService;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import org.eclipse.jetty.http.HttpStatus;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Path("/")
 public class AuthResource {
 
-    String url = "";
-    URI uri;
-
-    {
-        try {
-            uri = new URI(url);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //
     @GET
     @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(@QueryParam("login") String login, @QueryParam("psw") String psw,
-                          @Context HttpServletRequest req, @Context HttpServletResponse resp)
-            throws URISyntaxException, ServletException, IOException {
+                          @Context HttpServletRequest req, @Context HttpServletResponse resp) {
+
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
         if (session.getAttribute("user") != null) {
-
-            String url = "/";
-            URI uri = new URI(url);
-
-            return Response.temporaryRedirect(uri).build();
-        }
-        if (login == null || psw == null) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
-            url = "/";
-            uri = new URI(url);
-
-            return Response.temporaryRedirect(uri).build();
+            return Response.status(HttpStatus.OK_200).build();
         }
 
-
+        Map<String, Object> result = new HashMap<>();
         try {
             AuthService authService = new AuthService();
-            authService.login(login, psw, req);
+            UserDTO user = authService.login(login, psw, req);
+
+            result.put("status", "ok");
+            return Response.ok(result).build();
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("error", e.getMessage());
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
-            requestDispatcher.forward(req, resp);
+            result.put("status", "failed");
+            result.put("msg", e.getMessage());
+            return Response.status(HttpStatus.BAD_REQUEST_400).entity(result).build();
         }
-
-        url = "/info";
-        uri = new URI(url);
-
-        return Response.temporaryRedirect(uri).build();
     }
 
-
-    @GET
+    @POST
     @Path("/logout")
-    public Response logout(@Context HttpServletRequest req)
-            throws URISyntaxException {
+    public void logout(@Context HttpServletRequest req) {
         AuthService.logout(req.getSession());
-        url = "/";
-        uri = new URI(url);
-
-        return Response.temporaryRedirect(uri).build();
     }
 
     @POST
     @Path("/registration")
-    public String registration(@QueryParam("login") String login, @QueryParam("name") String name,
-                               @QueryParam("psw") String psw,
-                               @Context HttpServletRequest req, @Context HttpServletResponse resp) throws ServletException, IOException {
+    public Response registration(@QueryParam("login") String login,
+                                 @QueryParam("name") String name,
+                                 @QueryParam("psw") String psw,
+                                 @Context HttpServletRequest req,
+                                 @Context HttpServletResponse resp) {
         try {
             UserService.createUser(login, psw, name);
-            resp.sendRedirect("/");
+            return Response.ok().build();
         } catch (Exception e) {
-            e.printStackTrace();
-            req.setAttribute("error", e.getMessage());
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
-            requestDispatcher.forward(req, resp);
+            Map<String, String> res = new HashMap<>();
+            res.put("msg", e.getMessage());
+            return Response.status(HttpStatus.BAD_REQUEST_400).entity(res).build();
         }
-        return null;
     }
 }

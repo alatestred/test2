@@ -2,6 +2,7 @@ package com.servlet.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * @author Daulet Zholtayev
@@ -20,7 +21,7 @@ import javax.validation.constraints.NotNull;
                 "where login like :pretty and id!=:ownerId limit 10")
 
 })
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column

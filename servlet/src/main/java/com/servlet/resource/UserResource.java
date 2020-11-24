@@ -6,6 +6,7 @@ import com.servlet.domain.User;
 import com.servlet.domain.dto.*;
 import com.servlet.service.ChatService;
 import com.servlet.service.UserService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -40,15 +41,13 @@ public class UserResource {
         User user = (User) session.getAttribute("user");
 
         try {
-            List<UserDTO> users = UserService.findUsersLikeLogin(param, user.getId());
+            List<User> users = UserService.findUsersLikeLogin(param, user.getId());
             return new ObjectMapper().writeValueAsString(users);
-
-        }catch (SQLException | ClassNotFoundException | JsonProcessingException e){
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
             return "FAIL";
         }
     }
-    //
 
     @GET
     @Path("/createChat")
@@ -57,12 +56,12 @@ public class UserResource {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         try {
-            if(user.getId() == id) {
+            if (user.getId() == id) {
                 return new ObjectMapper().writeValueAsString(new ResponseDao("FAIL", null));
             }
-            Long chatId = ChatService.createChat(user.getId(), id);
+            Long chatId = ChatService.createSingleChat(user.getId(), id);
             return new ObjectMapper().writeValueAsString(new ResponseDao("OK", chatId));
-        } catch (SQLException | ClassNotFoundException | JsonProcessingException throwables) {
+        } catch (JsonProcessingException throwables) {
             throwables.printStackTrace();
             return null;
         }

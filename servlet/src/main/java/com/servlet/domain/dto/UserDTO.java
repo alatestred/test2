@@ -1,10 +1,14 @@
 package com.servlet.domain.dto;
 
+import com.servlet.domain.User;
+
+import java.io.Serializable;
+
 /**
  * @author Daulet Zholtayev
  * @since 15.11.2020 - 11:47
  */
-public class UserDTO {
+public class UserDTO implements Serializable {
 
     private Long id;
     private String name;
@@ -14,6 +18,10 @@ public class UserDTO {
         this.name = name;
         this.login = login;
         this.id = id;
+    }
+
+    public UserDTO(User user) {
+        this(user.getId(), user.getName(), user.getLogin());
     }
 
     public Long getId() {

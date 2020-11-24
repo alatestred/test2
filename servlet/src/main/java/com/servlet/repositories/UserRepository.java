@@ -5,6 +5,7 @@ import com.servlet.domain.User;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -21,20 +22,20 @@ public class UserRepository {
         TypedQuery<User> query = ManagerFactory.get()
                 .createNamedQuery("findByLogin", User.class);
         query.setParameter("login", login);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 
     public void createUser(String login, String password, String name) {
-        TypedQuery<User> query = ManagerFactory.get()
-                .createNamedQuery("createUser", User.class);
-        query.setParameter("login", login);
-        query.setParameter("password", password);
-        query.setParameter("name", name);
+        User user = new User(null, login, name, password);
+        ManagerFactory.get().persist(user);
     }
 
     public List<User> findUsersLikeLogin(String pretty, Long ownerId) {
-
         TypedQuery<User> query = ManagerFactory.get()
                 .createNamedQuery("findUsersLikeLogin", User.class);
         query.setParameter("pretty", pretty);

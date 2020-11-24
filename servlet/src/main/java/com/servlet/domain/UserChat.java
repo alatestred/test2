@@ -2,28 +2,28 @@ package com.servlet.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user_chat")
-public class UserChat {
+public class UserChat implements Serializable {
 
     @Id
-    @Column
-    private long id;
     @NotNull
     @Column(name = "user_id", nullable = false)
     private long userId;
 
+    @Id
     @NotNull
     @Column(name = "chat_id", nullable = false)
     private long chatId;
 
-    public long getId() {
-        return id;
+    public UserChat() {
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public UserChat(long userId, long chatId) {
+        this.userId = userId;
+        this.chatId = chatId;
     }
 
     public long getUserId() {
@@ -39,12 +39,6 @@ public class UserChat {
     }
 
     public void setChatId(long chatId) {
-        this.chatId = chatId;
-    }
-
-    public UserChat(long id, long userId, long chatId) {
-        this.id = id;
-        this.userId = userId;
         this.chatId = chatId;
     }
 }
