@@ -1,8 +1,21 @@
 package com.servlet.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "user_chat")
 public class UserChat {
+
+    @Id
+    @Column
     private long id;
+    @NotNull
+    @Column(name = "user_id", nullable = false)
     private long userId;
+
+    @NotNull
+    @Column(name = "chat_id", nullable = false)
     private long chatId;
 
     public long getId() {

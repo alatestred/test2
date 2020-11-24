@@ -1,13 +1,6 @@
 package com.servlet.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,7 +11,14 @@ import javax.validation.constraints.NotNull;
 @Entity
 // JPQL - java persistence query language
 @NamedQueries(value = {
-        @NamedQuery(name = "findByLogin", query = "select u from User u where u.login=:login"),
+        @NamedQuery(name = "findByLogin", query = "select u from User u where u.login=:login")
+})
+@NamedNativeQueries(value = {
+        @NamedNativeQuery(name = "createUser", query = "insert into users " +
+                "(name, login, password) values (:name,:login,:password)"),
+        @NamedNativeQuery(name = "findUsersLikeLogin", query = "select * from users " +
+                "where login like :pretty and id!=:ownerId limit 10")
+
 })
 public class User {
 

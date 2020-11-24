@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Path;
 import java.io.IOException;
 import java.util.*;
 
@@ -14,6 +15,7 @@ import java.util.*;
  * @author Daulet Zholtayev
  * @since 29.08.2020 - 18:11
  */
+
 public class FirstServlet extends HttpServlet {
 
 

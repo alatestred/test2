@@ -1,12 +1,35 @@
 package com.servlet.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "messages")
+@NamedQueries(value = {
+        @NamedQuery(name = "getUsersIdOfChat", query = "select uc.user_id as user_id from user_chat as uc" +
+                " where uc.chat_id=:chatId"),
+})
+@NamedNativeQueries(value = {
+        @NamedNativeQuery(name = "getMessages", query = "select m.id, m.message, m.date, u.name  from messages m" +
+                " left join users as u on u.id=m.author where m.chat_id =:chatId" +
+                " order by m.date asc"),
+        @NamedNativeQuery(name = "setMessages", query = "insert into messages " +
+                "(message, date, chat_id, author) values (:messageIn , NOW(), :chatId, :author )")
+})
 public class Message {
+    @Id
+    @Column
     private long id;
+    @Column
     private String message;
+    @Column
     private Date date;
+    @NotNull
+    @Column(name = "chat_id", nullable = false)
     private long chatId;
+    @NotNull
+    @Column(nullable = false)
     private String author;
 
     public String getAuthor() {

@@ -5,10 +5,8 @@ import com.servlet.domain.User;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * @author Daulet Zholtayev
@@ -24,6 +22,27 @@ public class UserRepository {
                 .createNamedQuery("findByLogin", User.class);
         query.setParameter("login", login);
         return query.getSingleResult();
+    }
+
+
+    public void createUser(String login, String password, String name) {
+        TypedQuery<User> query = ManagerFactory.get()
+                .createNamedQuery("createUser", User.class);
+        query.setParameter("login", login);
+        query.setParameter("password", password);
+        query.setParameter("name", name);
+    }
+
+    public List<User> findUsersLikeLogin(String pretty, Long ownerId) {
+
+        TypedQuery<User> query = ManagerFactory.get()
+                .createNamedQuery("findUsersLikeLogin", User.class);
+        query.setParameter("pretty", pretty);
+        query.setParameter("ownerId", ownerId);
+        return query.getResultList();
+
+//       ??????????????
+//        return result;
     }
 
 //    public void create(User user) {

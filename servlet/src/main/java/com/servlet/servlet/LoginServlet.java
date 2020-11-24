@@ -4,26 +4,22 @@ import com.servlet.service.AuthService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * @author Daulet Zholtayev
- * @since 15.09.2020 - 20:08
- */
-public class LoginServlet extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        super.doPost(req, resp);
+@WebServlet
+public class LoginServlet extends HttpServlet{
 
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 

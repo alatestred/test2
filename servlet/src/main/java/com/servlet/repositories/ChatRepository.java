@@ -14,7 +14,23 @@ public class ChatRepository {
     public List<Chat> getChats(Long userId) {
         TypedQuery<Chat> query = ManagerFactory.get()
                 .createNamedQuery("getChats", Chat.class);
-        query.setParameter("user_id", userId);
+        query.setParameter("userId", userId);
         return query.getResultList();
+    }
+
+    public Chat findExistsChatId(Long currentId, Long userId) {
+        TypedQuery<Chat> query = ManagerFactory.get()
+                .createNamedQuery("findExistsChatId", Chat.class);
+        query.setParameter("currentId", currentId);
+        query.setParameter("userId", userId);
+        return query.getSingleResult();
+    }
+
+    public void createChatUser(Long userId, Long chatId) {
+        TypedQuery<Chat> query = ManagerFactory.get()
+                .createNamedQuery("findExistsChatId", Chat.class);
+        query.setParameter("userId", userId);
+//       ???
+        query.setParameter("chatId", chatId);
     }
 }
